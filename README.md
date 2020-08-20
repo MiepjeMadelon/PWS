@@ -5,4 +5,5 @@ Het doel:
 We willen een data analyse-tool gebruiken om data te analyseren voor ons pws. Dit willen wij via python doen.
 
 De bestanden
-*test.py (wat de naam zegt, een test om te controleren of github werkt.
+*test.py (wat de naam zegt, een test om te controleren of github werkt)
+*clearDatabase.py (om de database via python schoon te maken)
