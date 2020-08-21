@@ -13,5 +13,5 @@ df = pd.DataFrame(data)
 df = df[['duration_minutes']]
 #proberen de standard deviaton uit te rekenen en falen
 SD = df.std(axis=None, skipna=None, level=None, ddof=1, numeric_only=None)
-#de resultaten uitprinten zodat ik een leuke error krijg
+#de resultaten uitprinten zodat ik een leuke error krijg 😭
 print(SD)
