@@ -45,9 +45,9 @@ trainsData = pd.DataFrame(trainsData)
 
 
 #now I'm setting up a while loop to later make it iterate through rows using the index
-condition = 29908;
+condition = len(trainsData)-1;
 tel = 0
-while condition > 0:
+while condition > 1: #1 because the len is including the header
     condition -= 1
     tel += 1
 print(condition)
