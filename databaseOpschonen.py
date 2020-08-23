@@ -45,10 +45,11 @@ trainsData = pd.DataFrame(trainsData)
 
 
 #now I'm setting up a while loop to later make it iterate through rows using the index
-condition = len(trainsData)-1;
+condition = len(trainsData)-1; #there now seems to be an extra row, I think it calculates the header as a row
 tel = 0
-while condition > 1: #1 because the len is including the header
+#print(trainsData.count())
+while condition >= 0: #1 because the len is including the header
+    #if condition == 0:
+        #print(trainsData.loc[[condition]]) #print rij met index 0, dus nu staat condition gelijk aan row nummers
     condition -= 1
     tel += 1
-print(condition)
-print(tel)
