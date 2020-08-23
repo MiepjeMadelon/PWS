@@ -54,6 +54,15 @@ trainsData = pd.DataFrame(trainsData)
 #trainsData.dropna() #before trainsData.replace = V8
 
 # replace field that's entirely space (or empty) with NaN
-trainsData.replace(np.nan, np.NaN)
-trainsData.dropna(axis = 0)
-trainsData.to_csv(r'../CleanDataV9_5.csv')
+#trainsData.replace(r'\s+', np.nan, regex=True)
+trainsData.dropna( #this now gives very weird results (V9_7)
+    axis=0,
+    how='any',
+    thresh=None,
+    inplace=True,
+    subset=['cause_nl', 'cause_en', 'statistical_cause_nl', 'statistical_cause_en', 'cause_group', 'start_time', 'end_time', 'duration_minutes']
+)
+contains_NaN = trainsData.isna().any(axis=None)
+print(contains_NaN)
+trainsData.to_csv(r'../CleanDataV9_8.csv')
+#IT WORKS!!!!!!!!!!
