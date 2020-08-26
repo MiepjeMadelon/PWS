@@ -64,5 +64,5 @@ trainsData.dropna( #this now gives very weird results (V9_7)
 )
 contains_NaN = trainsData.isna().any(axis=None)
 print(contains_NaN)
-trainsData.to_csv(r'../CleanDataV9_8.csv')
+#trainsData.to_csv(r'CleanDataNV1.csv')
 #IT WORKS!!!!!!!!!!
