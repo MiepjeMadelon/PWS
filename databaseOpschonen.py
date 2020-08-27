@@ -63,8 +63,22 @@ trainsData.dropna( #this now gives very weird results (V9_7)
     subset=['cause_nl', 'cause_en', 'statistical_cause_nl', 'statistical_cause_en', 'cause_group', 'start_time', 'end_time', 'duration_minutes']
 )
 contains_NaN = trainsData.isna().any(axis=None)
-print(contains_NaN)
-SD = calculateSD(trainsData, 'duration_minutes')
-print(SD)
+#print(contains_NaN)
+
 #trainsData.to_csv(r'CleanDataNV1.csv')
 #IT WORKS!!!!!!!!!!
+
+#Now we have to remove the outliers using the code from the SD.py and SDfunction.py files
+minutes = trainsData['duration_minutes'].tolist() #takes the column duration_minutes and puts it in a list
+SD3 = int(calculateSD(trainsData, 'duration_minutes')) #calculates the SD of the column
+print(SD3)#prints the SD to compare the beginning value with the end value
+#loops through each number to check if it is higher than the SD*3
+#If it is higher, than it removes it.
+#After all these values are removed, it recalculates the SD*3 until nothing is higher than that.
+while np.any(i >= SD3 for i in minutes):
+    trainsData = trainsData[trainsData['duration_minutes'] <= SD3] #used to be >=, this caused an infinite loop
+    minutes = trainsData['duration_minutes'].tolist()
+    SD3 = int(calculateSD(trainsData, 'duration_minutes'))
+    print(SD3) #it seems that this while statement is an infinite loop, with this I want to test that
+    #this loop is an infinite loop, since eventually it just keeps printing 1277
+    #changed >= to <= in line 79, now it prints the following 611,105,30,8,2,0 and keeps printing 0.
