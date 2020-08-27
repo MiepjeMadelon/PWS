@@ -1,6 +1,6 @@
 import numpy as np;
 import pandas as pd;
-
+from SDfunction import *
 
 #make the database ready
 #the names were already established, but now we can easily find them
@@ -64,5 +64,7 @@ trainsData.dropna( #this now gives very weird results (V9_7)
 )
 contains_NaN = trainsData.isna().any(axis=None)
 print(contains_NaN)
+SD = calculateSD(trainsData, 'duration_minutes')
+print(SD)
 #trainsData.to_csv(r'CleanDataNV1.csv')
 #IT WORKS!!!!!!!!!!
