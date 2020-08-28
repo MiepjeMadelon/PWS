@@ -7,4 +7,9 @@ import statistics as st
 def calculateSD(database, column):
     column = database[[column]]
     SD = column.std(axis=None, skipna=None, level=None, ddof=1, numeric_only=None)
-    return SD*3
+    return SD
+
+def calculateMean(database, column):
+    column = database[[column]]
+    mean = column.mean()
+    return mean

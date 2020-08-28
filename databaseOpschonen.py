@@ -70,15 +70,30 @@ contains_NaN = trainsData.isna().any(axis=None)
 
 #Now we have to remove the outliers using the code from the SD.py and SDfunction.py files
 minutes = trainsData['duration_minutes'].tolist() #takes the column duration_minutes and puts it in a list
-SD3 = int(calculateSD(trainsData, 'duration_minutes')) #calculates the SD of the column
-print(SD3)#prints the SD to compare the beginning value with the end value
+SD = int(calculateSD(trainsData, 'duration_minutes')) #calculates the SD of the column
+mean = int(calculateMean(trainsData, 'duration_minutes'))
+SDhigh = mean+3*SD
+SDlow = mean-3*SD
+print(SD)#prints the SD to compare the beginning value with the end value
+
+
+#The more I look at it, the less I think the SD should be recalculated, so I hashed this code out
 #loops through each number to check if it is higher than the SD*3
 #If it is higher, than it removes it.
 #After all these values are removed, it recalculates the SD*3 until nothing is higher than that.
-while np.any(i >= SD3 for i in minutes):
-    trainsData = trainsData[trainsData['duration_minutes'] <= SD3] #used to be >=, this caused an infinite loop
-    minutes = trainsData['duration_minutes'].tolist()
-    SD3 = int(calculateSD(trainsData, 'duration_minutes'))
-    print(SD3) #it seems that this while statement is an infinite loop, with this I want to test that
+#while np.any(i > SD3 for i in minutes): #used to be >=, it doesnt matter for the outcome
+    #trainsData = trainsData[trainsData['duration_minutes'] <= SD3] #used to be >=, this caused an infinite loop so I changed it to <=. Then to <
+    #minutes = trainsData['duration_minutes'].tolist()
+    #SD3 = int(calculateSD(trainsData, 'duration_minutes'))
+    #print(SD3) #it seems that this while statement is an infinite loop, with this I want to test that
     #this loop is an infinite loop, since eventually it just keeps printing 1277
     #changed >= to <= in line 79, now it prints the following 611,105,30,8,2,0 and keeps printing 0.
+    #changed <= to <, but now it keeps removing all values.
+while np.any(i >= SDhigh for i in minutes): #used to be >=, it doesnt matter for the outcome
+    trainsData = trainsData[trainsData['duration_minutes'] < SDhigh] #used to be >=, this caused an infinite loop so I changed it to <=. Then to <
+    minutes = trainsData['duration_minutes'].tolist()
+    SD = int(calculateSD(trainsData, 'duration_minutes')) #calculates the SD of the column
+    mean = int(calculateMean(trainsData, 'duration_minutes'))
+    SDhigh = mean+3*SD
+    print(SDhigh)
+    #print(SD3)
