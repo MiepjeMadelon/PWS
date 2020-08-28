@@ -70,8 +70,8 @@ contains_NaN = trainsData.isna().any(axis=None)
 
 #Now we have to remove the outliers using the code from the SD.py and SDfunction.py files
 minutes = trainsData['duration_minutes'].tolist() #takes the column duration_minutes and puts it in a list
-SD = int(calculateSD(trainsData, 'duration_minutes')) #calculates the SD of the column
-mean = int(calculateMean(trainsData, 'duration_minutes'))
+SD = calculateSD(trainsData, 'duration_minutes')  #calculates the SD of the column
+mean = calculateMean(trainsData, 'duration_minutes')
 SDhigh = mean+3*SD
 SDlow = mean-3*SD
 print(SD)#prints the SD to compare the beginning value with the end value
@@ -95,5 +95,5 @@ while np.any(i >= SDhigh for i in minutes): #used to be >=, it doesnt matter for
     SD = int(calculateSD(trainsData, 'duration_minutes')) #calculates the SD of the column
     mean = int(calculateMean(trainsData, 'duration_minutes'))
     SDhigh = mean+3*SD
-    print(SDhigh)
+    print(SDhigh) #to see how the values changed and to confirm it is an infinite loop
     #print(SD3)
