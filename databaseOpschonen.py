@@ -70,10 +70,10 @@ contains_NaN = trainsData.isna().any(axis=None)
 
 #Now we have to remove the outliers using the code from the SD.py and SDfunction.py files
 minutes = trainsData['duration_minutes'].tolist() #takes the column duration_minutes and puts it in a list
-SD = calculateSD(trainsData, 'duration_minutes')  #calculates the SD of the column
-mean = calculateMean(trainsData, 'duration_minutes')
-SDhigh = mean+3*SD
-SDlow = mean-3*SD
+SD = int(calculateSD(trainsData, 'duration_minutes'))  #calculates the SD of the column
+mean = int(calculateMean(trainsData, 'duration_minutes')) #calculated the mean of the column
+SDhigh = mean+3*SD #calculates the high outlier using the empirical rule
+SDlow = mean-3*SD #calculates the low outlier using the empirical rule
 print(SD)#prints the SD to compare the beginning value with the end value
 
 
@@ -89,11 +89,19 @@ print(SD)#prints the SD to compare the beginning value with the end value
     #this loop is an infinite loop, since eventually it just keeps printing 1277
     #changed >= to <= in line 79, now it prints the following 611,105,30,8,2,0 and keeps printing 0.
     #changed <= to <, but now it keeps removing all values.
-while np.any(i >= SDhigh for i in minutes): #used to be >=, it doesnt matter for the outcome
-    trainsData = trainsData[trainsData['duration_minutes'] < SDhigh] #used to be >=, this caused an infinite loop so I changed it to <=. Then to <
-    minutes = trainsData['duration_minutes'].tolist()
-    SD = int(calculateSD(trainsData, 'duration_minutes')) #calculates the SD of the column
-    mean = int(calculateMean(trainsData, 'duration_minutes'))
-    SDhigh = mean+3*SD
-    print(SDhigh) #to see how the values changed and to confirm it is an infinite loop
+#while np.any(i >= SDhigh for i in minutes): #used to be >=, it doesnt matter for the outcome
+    #trainsData = trainsData[trainsData['duration_minutes'] < SDhigh] #used to be >=, this caused an infinite loop so I changed it to <=. Then to <
+    #minutes = trainsData['duration_minutes'].tolist()
+    #SD = int(calculateSD(trainsData, 'duration_minutes')) #calculates the SD of the column
+    #mean = int(calculateMean(trainsData, 'duration_minutes'))
+    #SDhigh = mean+3*SD
+    #print(SDhigh) #to see how the values changed and to confirm it is an infinite loop
     #print(SD3)
+
+
+#New progress: The empirical rule (what we did above) should only be calculated ONCE
+#so this will give us the following:
+#remove all high outliers:
+trainsData = trainsData[trainsData['duration_minutes'] < SDhigh]
+trainsData = trainsData[trainsData['duration_minutes'] > SDlow]
+trainsData.to_csv(r'CleanDataNV2.csv')
