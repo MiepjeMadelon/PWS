@@ -1,6 +1,6 @@
 import numpy as np;
 import pandas as pd;
-
+from SDfunction import *
 
 #make the database ready
 #the names were already established, but now we can easily find them
@@ -55,6 +55,7 @@ trainsData = pd.DataFrame(trainsData)
 
 # replace field that's entirely space (or empty) with NaN
 #trainsData.replace(r'\s+', np.nan, regex=True)
+print("test")
 trainsData.dropna( #this now gives very weird results (V9_7)
     axis=0,
     how='any',
@@ -62,7 +63,52 @@ trainsData.dropna( #this now gives very weird results (V9_7)
     inplace=True,
     subset=['cause_nl', 'cause_en', 'statistical_cause_nl', 'statistical_cause_en', 'cause_group', 'start_time', 'end_time', 'duration_minutes']
 )
+print("test2")
 contains_NaN = trainsData.isna().any(axis=None)
 print(contains_NaN)
-trainsData.to_csv(r'../CleanDataV9_8.csv')
+
+#4 OCTOBER
+    #trying to drop all rows with 'werkzaamheden'
+trainData= trainsData[df.'cause_group' != 'engineering work']
+
+#trainsData.to_csv(r'CleanDataNV1.csv')
 #IT WORKS!!!!!!!!!!
+
+#Now we have to remove the outliers using the code from the SD.py and SDfunction.py files
+minutes = trainsData['duration_minutes'].tolist() #takes the column duration_minutes and puts it in a list
+SD = int(calculateSD(trainsData, 'duration_minutes'))  #calculates the SD of the column
+mean = int(calculateMean(trainsData, 'duration_minutes')) #calculated the mean of the column
+SDhigh = mean+3*SD #calculates the high outlier using the empirical rule
+SDlow = mean-3*SD #calculates the low outlier using the empirical rule
+print(SD)#prints the SD to compare the beginning value with the end value
+
+
+#The more I look at it, the less I think the SD should be recalculated, so I hashed this code out
+#loops through each number to check if it is higher than the SD*3
+#If it is higher, than it removes it.
+#After all these values are removed, it recalculates the SD*3 until nothing is higher than that.
+#while np.any(i > SD3 for i in minutes): #used to be >=, it doesnt matter for the outcome
+    #trainsData = trainsData[trainsData['duration_minutes'] <= SD3] #used to be >=, this caused an infinite loop so I changed it to <=. Then to <
+    #minutes = trainsData['duration_minutes'].tolist()
+    #SD3 = int(calculateSD(trainsData, 'duration_minutes'))
+    #print(SD3) #it seems that this while statement is an infinite loop, with this I want to test that
+    #this loop is an infinite loop, since eventually it just keeps printing 1277
+    #changed >= to <= in line 79, now it prints the following 611,105,30,8,2,0 and keeps printing 0.
+    #changed <= to <, but now it keeps removing all values.
+#while np.any(i >= SDhigh for i in minutes): #used to be >=, it doesnt matter for the outcome
+    #trainsData = trainsData[trainsData['duration_minutes'] < SDhigh] #used to be >=, this caused an infinite loop so I changed it to <=. Then to <
+    #minutes = trainsData['duration_minutes'].tolist()
+    #SD = int(calculateSD(trainsData, 'duration_minutes')) #calculates the SD of the column
+    #mean = int(calculateMean(trainsData, 'duration_minutes'))
+    #SDhigh = mean+3*SD
+    #print(SDhigh) #to see how the values changed and to confirm it is an infinite loop
+    #print(SD3)
+
+
+#New progress: The empirical rule (what we did above) should only be calculated ONCE
+#so this will give us the following:
+#remove all high outliers:
+trainsData = trainsData[trainsData['duration_minutes'] < SDhigh]
+trainsData = trainsData[trainsData['duration_minutes'] > SDlow]
+trainsData.to_csv(r'../CleanDataNV3.csv')
+#NVM the code works!!!!! It was a mistake with excel all along!
