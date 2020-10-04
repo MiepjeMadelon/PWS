@@ -110,5 +110,5 @@ print(SD)#prints the SD to compare the beginning value with the end value
 #remove all high outliers:
 trainsData = trainsData[trainsData['duration_minutes'] < SDhigh]
 trainsData = trainsData[trainsData['duration_minutes'] > SDlow]
-trainsData.to_csv(r'../CleanDataNV5.csv')
+trainsData.to_csv(r'CleanDataNV5.csv')
 #NVM the code works!!!!! It was a mistake with excel all along!
