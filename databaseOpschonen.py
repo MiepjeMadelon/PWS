@@ -55,6 +55,7 @@ trainsData = pd.DataFrame(trainsData)
 
 # replace field that's entirely space (or empty) with NaN
 #trainsData.replace(r'\s+', np.nan, regex=True)
+print("test")
 trainsData.dropna( #this now gives very weird results (V9_7)
     axis=0,
     how='any',
@@ -62,8 +63,13 @@ trainsData.dropna( #this now gives very weird results (V9_7)
     inplace=True,
     subset=['cause_nl', 'cause_en', 'statistical_cause_nl', 'statistical_cause_en', 'cause_group', 'start_time', 'end_time', 'duration_minutes']
 )
+print("test2")
 contains_NaN = trainsData.isna().any(axis=None)
-#print(contains_NaN)
+print(contains_NaN)
+
+#4 OCTOBER
+    #trying to drop all rows with 'werkzaamheden'
+trainData= trainsData[df.'cause_group' != 'engineering work']
 
 #trainsData.to_csv(r'CleanDataNV1.csv')
 #IT WORKS!!!!!!!!!!
@@ -104,5 +110,5 @@ print(SD)#prints the SD to compare the beginning value with the end value
 #remove all high outliers:
 trainsData = trainsData[trainsData['duration_minutes'] < SDhigh]
 trainsData = trainsData[trainsData['duration_minutes'] > SDlow]
-trainsData.to_csv(r'CleanDataNV2.csv')
+trainsData.to_csv(r'../CleanDataNV3.csv')
 #NVM the code works!!!!! It was a mistake with excel all along!
