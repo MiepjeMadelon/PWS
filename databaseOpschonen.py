@@ -4,9 +4,9 @@ from SDfunction import *
 
 #make the database ready
 #the names were already established, but now we can easily find them
-trainsData = pd.read_csv("disruptions-2011-2019.csv", names = ['rdt_id', 'ns_lines', 'rdt_lines', 'rdt_lines_id', 'rdt_station_names',
-       'rdt_station_codes', 'cause_nl', 'cause_en', 'statistical_cause_nl',
-       'statistical_cause_en', 'cause_group', 'start_time', 'end_time',
+trainsData = pd.read_csv("disruptions-2011-2019.csv", names = ['rdt_id', 'ns_lines',
+        'rdt_lines', 'rdt_lines_id', 'rdt_station_names', 'rdt_station_codes', 'cause_nl',
+        'cause_en', 'statistical_cause_nl', 'statistical_cause_en', 'cause_group', 'start_time', 'end_time',
        'duration_minutes'], header = 0);
 trainsData = pd.DataFrame(trainsData)
 
@@ -15,8 +15,9 @@ trainsData = pd.DataFrame(trainsData)
 #I dont know how to select the empty value. ' ' (V1), ''(V2) and None(V3) don't work
 #I removed the axis = 0 from data.drop(). It still doesn't work (V4)
     #loop through rows
-#for index, row in trainsData:
-    #if 'start_time' == 'nan' or 'duration_minutes' == 'nan' or 'cause_nl' == 'nan' or 'cause_en' == 'nan' or 'statistical_cause_en' == 'nan' or 'statistical_cause_nl' == 'nan': #see line 44 for nan
+#for row in trainsData
+    #if 'start_time' == 'nan' or 'duration_minutes' == 'nan' or 'cause_nl' == 'nan' or 'cause_en' == 'nan' or
+     #'statistical_cause_en' == 'nan' or 'statistical_cause_nl' == 'nan': #see line 44 for nan
         #trainsData.drop(row, axis = 0)
         #trainsData.to_csv(r'../CleanDataV8.csv')
 
@@ -41,7 +42,7 @@ trainsData = pd.DataFrame(trainsData)
 #I'll change each for loop into the working varient (V7 with None).
 #ValueError: too many values to unpack (expected 2)
 #Trying to figure out which value pandas assingns for empty cells by selecting one (looked it up via excel)
-# print(trainsData.loc[170,'cause_nl']) returns nan
+#print(trainsData.loc[170,'cause_nl']) #returns nan
 
 
 #now I'm setting up a while loop to later make it iterate through rows using the index
@@ -55,21 +56,20 @@ trainsData = pd.DataFrame(trainsData)
 
 # replace field that's entirely space (or empty) with NaN
 #trainsData.replace(r'\s+', np.nan, regex=True)
-print("test")
 trainsData.dropna( #this now gives very weird results (V9_7)
     axis=0,
     how='any',
     thresh=None,
     inplace=True,
-    subset=['cause_nl', 'cause_en', 'statistical_cause_nl', 'statistical_cause_en', 'cause_group', 'start_time', 'end_time', 'duration_minutes']
+    subset=['cause_nl', 'cause_en', 'statistical_cause_nl',
+     'statistical_cause_en', 'cause_group', 'start_time', 'end_time', 'duration_minutes']
 )
-print("test2")
-contains_NaN = trainsData.isna().any(axis=None)
-print(contains_NaN)
+contains_NaN = trainsData.isna().any(axis=None)#test to look if the dropna worked
+print(contains_NaN) #prints True because we set a subset
 
 #4 OCTOBER
     #trying to drop all rows with 'werkzaamheden'
-trainsData = trainsData[~trainsData['cause_group'].isin(['engineering work'])]
+trainsData = trainsData[~trainsData['cause_group'].isin(['list of strings'])]
 
 #trainsData.to_csv(r'CleanDataNV1.csv')
 #IT WORKS!!!!!!!!!!
@@ -110,5 +110,5 @@ print(SD)#prints the SD to compare the beginning value with the end value
 #remove all high outliers:
 trainsData = trainsData[trainsData['duration_minutes'] < SDhigh]
 trainsData = trainsData[trainsData['duration_minutes'] > SDlow]
-trainsData.to_csv(r'CleanDataNV5.csv')
+trainsData.to_csv(r'../CleanDataNV5.csv')
 #NVM the code works!!!!! It was a mistake with excel all along!
