@@ -69,7 +69,7 @@ print(contains_NaN)
 
 #4 OCTOBER
     #trying to drop all rows with 'werkzaamheden'
-trainData= trainsData[df.'cause_group' != 'engineering work']
+trainsData = trainsData[~trainsData['cause_group'].isin(['engineering work'])]
 
 #trainsData.to_csv(r'CleanDataNV1.csv')
 #IT WORKS!!!!!!!!!!
@@ -110,5 +110,5 @@ print(SD)#prints the SD to compare the beginning value with the end value
 #remove all high outliers:
 trainsData = trainsData[trainsData['duration_minutes'] < SDhigh]
 trainsData = trainsData[trainsData['duration_minutes'] > SDlow]
-trainsData.to_csv(r'../CleanDataNV3.csv')
+trainsData.to_csv(r'CleanDataNV5.csv')
 #NVM the code works!!!!! It was a mistake with excel all along!
