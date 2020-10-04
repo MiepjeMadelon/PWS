@@ -15,3 +15,4 @@ df = df[['duration_minutes']]
 SD = df.std(axis=None, skipna=None, level=None, ddof=1, numeric_only=None)
 #de resultaten uitprinten zodat ik een leuke error krijg 😭
 print(SD)
+print(" hello")
