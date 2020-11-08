@@ -17,7 +17,7 @@ trainsData = pd.read_csv("output_6.csv", names = ['rdt_id', 'ns_lines', 'rdt_lin
        'duration_minutes', 'start_date', 'start_moment', 'start_year',
        'start_month', 'start_day', 'start_hour', 'start_minute', 'start_second'], header = 0);
 data = pd.read_csv('output_6.csv')
-x = 'defecte spoorbrug'
+x = 'aanrijding'
 data = data.loc[data['cause_nl'] == x]
 #lets firt make a table with the months and how many minutes it'll take.
 januari = data.loc[data['start_month'] == 1]
@@ -56,77 +56,77 @@ minnov = november['duration_minutes'].sum()
 december = data.loc[data['start_month'] == 12]
 mindec = december['duration_minutes'].sum()
 
-zero = data.loc[data['start_month'] == 00]
-min0 = januari['duration_minutes'].sum()
+zero = data.loc[data['start_hour'] == 0]
+min0 = zero['duration_minutes'].sum()
 
-one = data.loc[data['start_month'] == 01]
-min1 = februari['duration_minutes'].sum()
+one = data.loc[data['start_hour'] == 1]
+min1 = one['duration_minutes'].sum()
 
-two = data.loc[data['start_month'] == 02]
-min2 = maart['duration_minutes'].sum()
+two = data.loc[data['start_hour'] == 2]
+min2 = two['duration_minutes'].sum()
 
-three = data.loc[data['start_month'] == 03]
-min3 = april['duration_minutes'].sum()
+three = data.loc[data['start_hour'] == 3]
+min3 = three['duration_minutes'].sum()
 
-four = data.loc[data['start_month'] == 04]
-min4 = mei['duration_minutes'].sum()
+four = data.loc[data['start_hour'] == 4]
+min4 = four['duration_minutes'].sum()
 
-five = data.loc[data['start_month'] == 05]
-min5 = juni['duration_minutes'].sum()
+five = data.loc[data['start_hour'] == 5]
+min5 = five['duration_minutes'].sum()
 
-six = data.loc[data['start_month'] == 06]
-min6 = juli['duration_minutes'].sum()
+six = data.loc[data['start_hour'] == 6]
+min6 = six['duration_minutes'].sum()
 
-seven = data.loc[data['start_month'] == 07]
-min7 = augustus['duration_minutes'].sum()
+seven = data.loc[data['start_hour'] == 7]
+min7 = seven['duration_minutes'].sum()
 
-eight = data.loc[data['start_month'] == 08]
-min8 = september['duration_minutes'].sum()
+eight = data.loc[data['start_hour'] == 8]
+min8 = eight['duration_minutes'].sum()
 
-nine = data.loc[data['start_month'] == 09]
-min9 = oktober['duration_minutes'].sum()
+nine = data.loc[data['start_hour'] == 9]
+min9 = nine['duration_minutes'].sum()
 
-ten = data.loc[data['start_month'] == 10]
-min10 = november['duration_minutes'].sum()
+ten = data.loc[data['start_hour'] == 10]
+min10 = ten['duration_minutes'].sum()
 
-eleven = data.loc[data['start_month'] == 11]
-min11 = december['duration_minutes'].sum()
+eleven = data.loc[data['start_hour'] == 11]
+min11 = eleven['duration_minutes'].sum()
 
-twelve = data.loc[data['start_month'] == 12]
-min12 = december['duration_minutes'].sum()
+twelve = data.loc[data['start_hour'] == 12]
+min12 = twelve['duration_minutes'].sum()
 
-thirteen = data.loc[data['start_month'] == 13]
-min13 = december['duration_minutes'].sum()
+thirteen = data.loc[data['start_hour'] == 13]
+min13 = thirteen['duration_minutes'].sum()
 
-fourteen = data.loc[data['start_month'] == 14]
-min14 = december['duration_minutes'].sum()
+fourteen = data.loc[data['start_hour'] == 14]
+min14 = fourteen['duration_minutes'].sum()
 
-fiveteen = data.loc[data['start_month'] == 15]
-min15 = december['duration_minutes'].sum()
+fiveteen = data.loc[data['start_hour'] == 15]
+min15 = fiveteen['duration_minutes'].sum()
 
-sixteen = data.loc[data['start_month'] == 16]
-min16 = december['duration_minutes'].sum()
+sixteen = data.loc[data['start_hour'] == 16]
+min16 = sixteen['duration_minutes'].sum()
 
-seventeen = data.loc[data['start_month'] == 17]
-min17 = december['duration_minutes'].sum()
+seventeen = data.loc[data['start_hour'] == 17]
+min17 = seventeen['duration_minutes'].sum()
 
-eighteen = data.loc[data['start_month'] == 18]
-min18 = december['duration_minutes'].sum()
+eighteen = data.loc[data['start_hour'] == 18]
+min18 = eighteen['duration_minutes'].sum()
 
-nineteen = data.loc[data['start_month'] == 19]
-min19 = december['duration_minutes'].sum()
+nineteen = data.loc[data['start_hour'] == 19]
+min19 = nineteen['duration_minutes'].sum()
 
-twenty = data.loc[data['start_month'] == 20]
-min20 = december['duration_minutes'].sum()
+twenty = data.loc[data['start_hour'] == 20]
+min20 = twenty['duration_minutes'].sum()
 
-twentyOne = data.loc[data['start_month'] == 21]
-min21 = december['duration_minutes'].sum()
+twentyOne = data.loc[data['start_hour'] == 21]
+min21 = twentyOne['duration_minutes'].sum()
 
-twentyTwo = data.loc[data['start_month'] == 22]
-min22 = december['duration_minutes'].sum()
+twentyTwo = data.loc[data['start_hour'] == 22]
+min22 = twentyTwo['duration_minutes'].sum()
 
-twentyThree = data.loc[data['start_month'] == 23]
-min23 = december['duration_minutes'].sum()
+twentyThree = data.loc[data['start_hour'] == 23]
+min23 = twentyThree['duration_minutes'].sum()
 
 lenmonths = [len(januari),len(februari), len(maart), len(april), len(mei), len(juni), len(juli), len(augustus), len(september), len(oktober),len(november), len(december)]
 months = ["jan", "feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"]
@@ -139,26 +139,29 @@ print("Aantal minuten storing vanwege " + x + " per maand")
 print(minutes)
 print("Aantal " + x + " per maand")
 print(lenmonths)
-plt.bar(range(len(months)), lenmonths)
-plt.xticks(range(len(months)), months)
-plt.ylabel("Aantal")
-plt.title("Aantal per maand: " + x)
+print("Aantal minuten per uur")
+print(minutesperHour)
+print("Aantal per uur")
+print(lentimes)
+#plt.bar(range(len(months)), lenmonths)
+#plt.xticks(range(len(months)), months)
+#plt.ylabel("Aantal")
+#plt.title("Aantal per maand: " + x)
 #plt.show()
 
-plt.bar(range(len(months)), minutes)
-plt.xticks(range(len(months)), months)
-plt.ylabel("Minutes")
-plt.title("Minuten per maand: " + x)
+#plt.bar(range(len(months)), minutes)
+#plt.xticks(range(len(months)), months)
+#plt.ylabel("Minutes")
+#plt.title("Minuten per maand: " + x)
 #plt.show()
+plt.bar(range(len(lentimes)), lentimes)
+plt.xticks(range(len(hours)), hours)
+plt.ylabel("Aantal")
+plt.title("Aantal per uur: " + x)
+plt.show()
 
 plt.bar(range(len(lentimes)), minutesperHour)
 plt.xticks(range(len(hours)), hours)
 plt.ylabel("Minutes")
 plt.title("Minuten per uur: " + x)
-#plt.show()
-
-plt.bar(range(len(lentimes)), lentimes)
-plt.xticks(range(len(hours)), hours)
-plt.ylabel("Aantal")
-plt.title("Aantal per uur: " + x)
 #plt.show()
