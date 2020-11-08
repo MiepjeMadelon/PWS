@@ -80,9 +80,7 @@ num_start_minute = data['start_minute'].value_counts()
 
 num_start_second = data['start_second'].value_counts()
 #print(num_start_second)
-causeList=df["cause_nl"].tolist()
-print(causeList)
-numCauses = Counter(causeList)
+
 
 
 

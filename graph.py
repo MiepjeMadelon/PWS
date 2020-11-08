@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 
 df = pd.read_csv('CleanDataNV5.csv')
 causeList=df["cause_nl"].tolist()
-print(causeList)
 numCauses = Counter(causeList)
 num50Causes = numCauses.most_common(50)
 
