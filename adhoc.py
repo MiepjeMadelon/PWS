@@ -17,7 +17,7 @@ trainsData = pd.read_csv("output_6.csv", names = ['rdt_id', 'ns_lines', 'rdt_lin
        'duration_minutes', 'start_date', 'start_moment', 'start_year',
        'start_month', 'start_day', 'start_hour', 'start_minute', 'start_second'], header = 0);
 data = pd.read_csv('output_6.csv')
-x = 'inzet van hulpdiensten'
+x = 'defecte spoorbrug'
 data = data.loc[data['cause_nl'] == x]
 #lets firt make a table with the months and how many minutes it'll take.
 januari = data.loc[data['start_month'] == 1]
@@ -67,10 +67,10 @@ plt.bar(range(len(months)), lenmonths)
 plt.xticks(range(len(months)), months)
 plt.ylabel("Aantal")
 plt.title("Aantal per maand: " + x)
-plt.show()
+#plt.show()
 
 plt.bar(range(len(months)), minutes)
 plt.xticks(range(len(months)), months)
 plt.ylabel("Minutes")
 plt.title("Minuten per maand: " + x)
-#plt.show()
+plt.show()
