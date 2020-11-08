@@ -64,7 +64,7 @@ num_start_moment = data['start_moment'].value_counts()
 #print(num_start_moment)
 
 num_start_year = data['start_year'].value_counts()
-print(num_start_year)
+#print(num_start_year)
 
 num_start_month = data['start_month'].value_counts()
 #print(num_start_month)
