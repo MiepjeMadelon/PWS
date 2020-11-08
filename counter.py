@@ -64,7 +64,7 @@ num_start_moment = data['start_moment'].value_counts()
 #print(num_start_moment)
 
 num_start_year = data['start_year'].value_counts()
-print(num_start_year)
+#print(num_start_year)
 
 num_start_month = data['start_month'].value_counts()
 #print(num_start_month)
@@ -80,7 +80,9 @@ num_start_minute = data['start_minute'].value_counts()
 
 num_start_second = data['start_second'].value_counts()
 #print(num_start_second)
-
+causeList=df["cause_nl"].tolist()
+print(causeList)
+numCauses = Counter(causeList)
 
 
 
