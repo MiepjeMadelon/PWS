@@ -4,6 +4,10 @@ Het hopeloze data science project
 # Het doel:
 We willen een data analyse-tool gebruiken om data te analyseren voor ons pws. Dit willen wij via python doen.
 
+De bestanden
+*test.py (wat de naam zegt, een test om te controleren of github werkt)
+*clearDatabase.py (om de database via python schoon te maken)
+=======
 # De python bestanden
   - test.py (wat de naam zegt, een test om te controleren of github werkt.
   - databaseOpschonen.py (in dit document proberen wij de lege rijen te verwijderen en mbv van de SD (die wordt berekend in SD.py) outliers te verwijderen)

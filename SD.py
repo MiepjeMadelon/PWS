@@ -5,7 +5,7 @@ import matplotlib.pyplot as pyplot
 import statistics as st
 
 #database toevoegen
-input_file = '/Users/Yasmin/Documents/pwsprogrammeren/treinstoringen.csv'
+input_file = '/Users/Yasmin/Documents/pwsProgrammeren/treinstoringen.csv'
 data = pd.read_csv('treinstoringen.csv')
 #dataframe df aanmaken
 df = pd.DataFrame(data)
