@@ -18,6 +18,7 @@ trainsData = pd.read_csv("output_6.csv", names = ['rdt_id', 'ns_lines', 'rdt_lin
        'start_month', 'start_day', 'start_hour', 'start_minute', 'start_second'], header = 0);
 data = pd.read_csv('output_6.csv')
 x = 'seinstoring'
+
 data = data.loc[data['cause_nl'] == x]
 #lets firt make a table with the months and how many minutes it'll take.
 januari = data.loc[data['start_month'] == 1]
@@ -159,6 +160,7 @@ plt.xticks(range(len(hours)), hours)
 plt.ylabel("Aantal")
 plt.title("Aantal per uur: " + x)
 #plt.show()
+
 plt.bar(range(len(lentimes)), minutesperHour)
 plt.xticks(range(len(hours)), hours)
 plt.ylabel("Minutes")
