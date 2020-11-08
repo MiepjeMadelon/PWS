@@ -38,7 +38,7 @@ trainsData = pd.DataFrame(trainsData)
 #it only prints the first row.
 #for index, row in trainsData:
     #print();
-#now it works, however, there are too many values to unpack
+#now it works, however, there are too many values to unpack #jeez, look up what errors mean, will you?
 #I'll change each for loop into the working varient (V7 with None).
 #ValueError: too many values to unpack (expected 2)
 #Trying to figure out which value pandas assingns for empty cells by selecting one (looked it up via excel)
@@ -69,7 +69,7 @@ print(contains_NaN) #prints True because we set a subset
 
 #4 OCTOBER
     #trying to drop all rows with 'werkzaamheden'
-trainsData = trainsData[~trainsData['cause_group'].isin(['list of strings'])]
+#trainsData = trainsData[~trainsData['cause_group'].isin(['list of strings'])]
 
 #trainsData.to_csv(r'CleanDataNV1.csv')
 #IT WORKS!!!!!!!!!!
