@@ -14,7 +14,7 @@ data = pd.read_csv('CleanDataNV5.csv')
 #for row in data:
 #       if len(row) > 14:
 #           datum = row[13].split('-') [0]
-#
+
 #print(datum)
 
 #outfilename = "hopefully.csv"
@@ -44,20 +44,21 @@ data = pd.read_csv('CleanDataNV5.csv')
 
 #for row in data:
 #       datum = data.start_time.split("-") [0]
-#455
+#
 #print(datum)
 
 
 #print([start_time[i:i+2] for i in range(0, len(start_time), 3)])
 
-#data['duplicate'] = data['start_time']
+data['duplicate'] = data['start_time']
 
-#split_data = data['duplicate'].str.split(' ')
-#dataf = split_data.to_list()
+split_data = data['duplicate'].str.split(' ')
+df = split_data.to_list()
 #print(df)  #test
-#names = ['start_day', 'start_hour']
-#new_data = pd.DataFrame(dataf, columns=names)
+names = ['start_day', 'start_hour']
+new_data = pd.DataFrame(df, columns=names)
 #print(new_data)  #test
+
 #print(df['start_day'])  #test
 
 #data['start_day'] = new_data
@@ -65,19 +66,17 @@ data = pd.read_csv('CleanDataNV5.csv')
 
 #data.to_csv('output_2.csv', index=False)
 
-#merged = trainsData.merge(splitData, on='title')
-#merged.to_csv("output_3.csv", index=False)
+merged = trainsData.merge(split_data)
+merged.to_csv("output_3.csv", index=False)
 
-data[['start_date','start_moment']] = data['start_time'].str.split(" ", expand=True)
+#data[['start_date','start_moment']] = data['start_time'].str.split(" ", expand=True)
 
-data[['start_year','start_month','start_day']] = data['start_date'].str.split("-", expand=True)
-data[['start_hour','start_minute','start_second']] = data['start_moment'].str.split(":", expand=True)
+#data[['start_year','start_month','start_day']] = data['start_date'].str.split("-", expand=True)
+#data[['start_hour','start_minute','start_second']] = data['start_moment'].str.split(":", expand=True)
 
-data.to_csv('output_6.csv', index = False)
+#data.to_csv('output_6.csv', index = False)
 
 #data['duplicate_2'] = data['start_day']
 #split_data_2 = data['duplicate_2'].str.split('-')
 #dataf = split_data_2.to_list()
 #print(dataf)  #test
-
-#print(data['duplicate'])
