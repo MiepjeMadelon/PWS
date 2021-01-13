@@ -17,7 +17,11 @@ for j in years:
         for d in range(31):
             e=str(d+1)
             x = k + '-' + n + '-' + e
-            print(x)   #test
+#            print(x)   #test
+
+            if x=='2019-2-29' or x=='2019-2-30' or x=='2019-2-31' or x=='2019-4-31' or x=='2019-6-31' or x=='2019-9-31' or x=='2019-11-31' or x=='2020-2-30' or x=='2020-2-31' or x=='2020-4-31' or x=='2020-6-31' or x=='2020-9-31' or x=='2020-11-31':
+                continue
+            print(x)
 
             URL = 'https://www.rijdendetreinen.nl/treinarchief/{}/utrecht-centraal'.format(x)
 #            print(URL) #test
