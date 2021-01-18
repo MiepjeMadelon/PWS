@@ -9,7 +9,21 @@ allTrainData = pd.read_csv("output_6.csv", header = 0);
 numTrains = pd.read_csv("webscraperResultV2.csv", names = ['Year', 'Month', 'Day', 'Trains'], header = 0);
 
 allTrainData = allTrainData.loc[allTrainData['start_year'] == 2019]
-numTrains = numTrains.loc[numTrains['Year'] == 2019]
+
+rdtLines = allTrainData['rdt_lines'].tolist()
+j = 0
+indexUtrechtData = []
+for i in rdtLines:
+    try:
+        if 'Utrecht Centraal' in i:
+            indexUtrechtData.append(j)
+    except Exception as e:
+        pass
+    j = j+1
+
+#UtrechtData = allTrainData[allTrainData.id in indexUtrechtData]
+
+
 k = 2019
 months = [];
 days = [];
@@ -31,19 +45,20 @@ for m in range(12):
             dailyTrains = monthlyTrains.loc[monthlyTrains['Day'] == e]#TRAINS
             numDailyTrains = dailyTrains['Trains'].values[0]#TRAINS
             numcompared = lenDailyData/numDailyTrains#BOTH
-            print('2019' + '-' + str(n) + '-' + str(e))
-            print(numcompared)
+            #print('2019' + '-' + str(n) + '-' + str(e))
+            #print(numcompared)
             months.append(n)
             days.append(e)
             numDataTotal.append(lenDailyData)
             #This code is not yet correct, it now checks for all rows that day
+
             try:
                 if 'Utrecht Centraal' in dailyData['rdt_lines'].values[0]:
-                    print('jup')
-                    numTrainsUtrechtCentraal.append(lenDailyData)
-
+                    pass
                 else:
-                    print('nope')
+                    #print('nope')
+                    pass
             except Exception as e:
                 if True:
-                    print('NOPE')
+                    #print('NOPE')
+                    pass
