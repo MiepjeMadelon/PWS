@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import statistics as st
 
+
+
 #kopieer dit en hopelijk werkt het
 trainsData = pd.read_csv("CleanDataNV5.csv", names = ['rdt_id', 'ns_lines', 'rdt_lines', 'rdt_lines_id', 'rdt_station_names',
        'rdt_station_codes', 'cause_nl', 'cause_en', 'statistical_cause_nl',

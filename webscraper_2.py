@@ -1,7 +1,14 @@
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
-
+from counter import *
+import collections
+import numpy as np
+import matplotlib.pyplot as plt
+import statistics as st
+import csv
+import re
 
 
 #ik wil kijken of ik x kan opbouwen uit 3 variabelen, het jaar, de maand en dag
@@ -9,7 +16,12 @@ from urllib.request import urlopen
 #maand moet van 1 t/m 12
 #dag moet van 1 t/m 31
 #j='2020'
-years=['2019', '2020']
+year = [];
+months = [];
+days = [];
+numTrains = [];
+
+years=[2019, 2020]
 for j in years:
     k=str(j)
     for m in range(12):
@@ -42,6 +54,9 @@ for j in years:
 #https://realpython.com/python-web-scraping-practical-introduction/#your-first-web-scraper
 
             page = urlopen(URL)
+            year.append(int(k));
+            months.append(int(n));
+            days.append(int(e));
 
             html_bytes = page.read()
             html = html_bytes.decode("utf-8")
@@ -49,5 +64,21 @@ for j in years:
             start_index = html.find('<td>') + len('<td>')
             end_index = html.find('</td>',start_index)
             table = html[start_index:end_index]
+            table.rstrip()
+            table.strip()
+            table = re.sub(r'[^\w\s]','',table)
+            numTrains.append(int(table))
+            if x=='2020-12-31':
+                break
+        if x=='2020-12-31':
+            break
+    if x=="2020-12-31":
+        break
 
-            print(table)
+data = {'Year':  year,
+'Month': months,
+'Day': days,
+'Trains': numTrains
+}
+df = pd.DataFrame(data, columns = ['Year','Month','Day', 'Trains'])
+df.to_csv(r'webscraperResultV2.csv')
